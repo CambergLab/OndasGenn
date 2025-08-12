@@ -1,0 +1,16 @@
+{
+  "name": "grupo-ondas-website",
+  "version": "1.0.0",
+  "description": "Grupo Ondas - Rhode Island's Only Capoeira Group website",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "start": "python -m http.server 3000",
+    "build": "echo 'Static website - no build required'"
+  },
+  "keywords": ["capoeira", "rhode-island", "martial-arts", "website"],
+  "author": "Grupo Ondas",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}
