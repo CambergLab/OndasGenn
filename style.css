@@ -606,6 +606,30 @@ button:focus {
     }
 }
 
+/* Loading spinner animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Instagram widget styles */
+.elfsight-app-6c4e3b26-c9ea-4f6b-8d1a-5d9e4a2b7c8f {
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.snapwidget-widget {
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* Responsive adjustments for Instagram widgets */
+@media (max-width: 768px) {
+    .snapwidget-widget {
+        height: 400px;
+    }
+}
+
 /* Music Page Specific Styles */
 .mt-2 {
     margin-top: 1rem;

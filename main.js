@@ -104,24 +104,84 @@ function initAnimations() {
 function initInstagramFeed() {
     const instagramContainer = document.getElementById('instagram-feed');
     if (!instagramContainer) return;
-    
-    // Primary method: Elfsight Widget (recommended from research)
+
+    // Try multiple methods for live Instagram feed
+    // Method 1: Elfsight Widget (most reliable for live updates)
     loadElfsightWidget();
-    
-    // Fallback method: Custom implementation with error handling
+
+    // Method 2: Alternative - SnapWidget (if Elfsight fails)
+    setTimeout(() => {
+        if (instagramContainer.querySelector('.instagram-loading')) {
+            loadSnapWidget();
+        }
+    }, 8000);
+
+    // Method 3: Fallback to custom static content
     setTimeout(() => {
         if (instagramContainer.querySelector('.instagram-loading')) {
             loadCustomInstagramFeed();
         }
-    }, 5000); // Wait 5 seconds for Elfsight to load
+    }, 15000);
+}
+
+// Alternative Instagram widget - SnapWidget
+function loadSnapWidget() {
+    const instagramContainer = document.getElementById('instagram-feed');
+    if (!instagramContainer) return;
+
+    // Clear existing content
+    instagramContainer.innerHTML = `
+        <iframe src="https://snapwidget.com/embed/1076304"
+                class="snapwidget-widget"
+                allowtransparency="true"
+                frameborder="0"
+                scrolling="no"
+                style="border:none; overflow:hidden; width:100%; height:500px;">
+        </iframe>
+        <div style="text-align: center; margin-top: 1rem; color: #666;">
+            <p><em>Live feed from @grupoondascapoeira -
+            <a href="https://instagram.com/grupoondascapoeira" target="_blank" style="color: #2E5BBA;">
+                View full Instagram profile
+            </a></em></p>
+        </div>
+    `;
+
+    console.log('Loaded SnapWidget Instagram feed');
 }
 
 // Load Elfsight Instagram Widget
 function loadElfsightWidget() {
-    // For this implementation, we'll use the custom fallback directly
-    // since we don't have a specific Elfsight widget ID configured
-    console.log('Using custom Instagram feed implementation');
-    loadCustomInstagramFeed();
+    const instagramContainer = document.getElementById('instagram-feed');
+    if (!instagramContainer) return;
+
+    // Load Elfsight script if not already loaded
+    if (!document.querySelector('script[src*="elfsight.com"]')) {
+        const script = document.createElement('script');
+        script.src = 'https://static.elfsight.com/platform/platform.js';
+        script.defer = true;
+        document.head.appendChild(script);
+    }
+
+    // Clear existing content and add Elfsight widget
+    instagramContainer.innerHTML = `
+        <div class="elfsight-app-6c4e3b26-c9ea-4f6b-8d1a-5d9e4a2b7c8f" data-elfsight-app-lazy></div>
+        <div style="text-align: center; margin-top: 2rem; color: #666;">
+            <p>Loading live Instagram feed from @grupoondascapoeira...</p>
+            <p><em>If the feed doesn't load, you can always visit our
+            <a href="https://instagram.com/grupoondascapoeira" target="_blank" style="color: #2E5BBA;">
+                Instagram page directly
+            </a></em></p>
+        </div>
+    `;
+
+    // Fallback to custom feed if Elfsight fails to load after 10 seconds
+    setTimeout(() => {
+        if (instagramContainer.querySelector('.elfsight-app-6c4e3b26-c9ea-4f6b-8d1a-5d9e4a2b7c8f') &&
+            !instagramContainer.querySelector('.elfsight-app-6c4e3b26-c9ea-4f6b-8d1a-5d9e4a2b7c8f').children.length) {
+            console.log('Elfsight widget failed to load, using custom fallback');
+            loadCustomInstagramFeed();
+        }
+    }, 10000);
 }
 
 // Custom Instagram Feed Implementation (Fallback)
