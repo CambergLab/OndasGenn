@@ -294,19 +294,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Logo Animation
+// Logo Animation - Simplified to always show logo
 document.addEventListener('DOMContentLoaded', function() {
     const logo = document.querySelector('.logo-img');
     if (logo) {
-        logo.addEventListener('load', function() {
-            this.style.opacity = '1';
+        // Ensure logo is always visible
+        logo.style.opacity = '1';
+        logo.style.transform = 'scale(1)';
+        logo.style.transition = 'transform 0.3s ease';
+
+        // Only add hover effect
+        logo.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+        });
+
+        logo.addEventListener('mouseleave', function() {
             this.style.transform = 'scale(1)';
         });
-        
-        // Initial state
-        logo.style.opacity = '0';
-        logo.style.transform = 'scale(0.8)';
-        logo.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     }
 });
 
