@@ -12,17 +12,11 @@
 <body>
     <header>
         <nav>
-            <a href="index.html" class="logo">
-                <img
-src="images/Grupo Ondas Logo.jpg"
-alt="Grupo Ondas Logo"
-class="logo-img"
->
-            </a>
+            <a href="index.html" class="logo">Grupo Ondas</a>
             <ul class="nav-menu">
                 <li><a href="index.html" class="active">Homepage</a></li>
-                <li><a href="#locations">Locations</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="songs.html">Songs</a></li>
             </ul>
             <a
 href="https://instagram.com/grupoondascapoeira"
@@ -47,27 +41,44 @@ rel="noopener"
             <p class="description">Afro-Brazilian martial art incorporating music, dancing, acrobatics, and self-defense</p>
         </section>
 
+        <!-- Contact Information -->
+        <section class="contact">
+            <h2>Contact Information</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>Mestre Tigri</h3>
+                    <p>Silas O Pinto</p>
+                    <p><a href="tel:+14017813480">(401) 781-3480</a></p>
+                </div>
+                <div class="contact-item">
+                    <h3>Follow Us</h3>
+                    <p><a
+href="https://instagram.com/grupoondascapoeira"
+target="_blank"
+rel="noopener"
+>@grupoondascapoeira</a></p>
+                </div>
+                <div class="contact-item">
+                    <h3>Mailing Address</h3>
+                    <p>54 West Friendship St<br>Providence, RI 02907</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Training Locations -->
-        <section id="locations" class="locations">
+        <section class="locations">
             <h2>Training Locations</h2>
+            <p class="text-center mb-2">
+                <span class="schedule-time">Wednesday & Friday, 6:30 PM</span>
+            </p>
             
             <div class="cards-grid">
-                <!-- Providence Location -->
-                <div class="card">
-                    <h3>Providence, RI</h3>
-                    <p><strong>Status:</strong> Training confirmed</p>
-                    <p><strong>Schedule:</strong> Wednesday & Friday, 6:30 PM</p>
-                    <p><strong>Contact:</strong> Please contact Mestre Tigri for venue details</p>
-                    <p><strong>Phone:</strong> <a onclick="window.location.href='tel:+14017813480'" style="cursor: pointer; color: #007bff; text-decoration: underline;">(401) 781-3480</a></p>
-                    <p><em>Specific venue details available upon contact</em></p>
-                </div>
-
                 <!-- Warwick Location -->
                 <div class="card">
                     <h3>Warwick, RI</h3>
                     <p><strong>Venue:</strong> New Wave Martial Arts & Fitness</p>
                     <p><strong>Address:</strong> 2327 W Shore Rd, Warwick, RI 02889</p>
-                    <p><strong>Phone:</strong> <a onclick="window.location.href='tel:+14012613485'" style="cursor: pointer; color: #007bff; text-decoration: underline;">(401) 261-3485</a></p>
+                    <p><strong>Phone:</strong> <a href="tel:+14012613485">(401) 261-3485</a></p>
                     <p><strong>Email:</strong> <a href="mailto:Info@NewWaveMartialArts.com">Info@NewWaveMartialArts.com</a></p>
                     <p><strong>Website:</strong> <a
 href="http://www.newwavemartialarts.com/"
@@ -75,16 +86,8 @@ target="_blank"
 rel="noopener"
 class="website-link"
 >newwavemartialarts.com</a></p>
-                    <p><strong>Social Media:</strong> <a
-href="https://instagram.com/newwave.ri"
-target="_blank"
-rel="noopener"
->@newwave.ri</a></p>
+                    <p><strong>Schedule:</strong> Wednesday & Friday, 6:30-8:00 PM</p>
                     <p class="rating">★★★★★ 4.9/5 stars (16 reviews)</p>
-                    <div class="schedule-info">
-                        <p><strong>Kids Classes:</strong> Wednesdays & Fridays - 5:30pm to 6:30pm</p>
-                        <p><strong>Adult Classes:</strong> Wednesdays & Fridays - 6:30pm to 8:00pm</p>
-                    </div>
                     <p><strong>Facility Hours:</strong></p>
                     <ul>
                         <li>Monday-Tuesday, Thursday: 5:00 PM - 8:30 PM</li>
@@ -95,19 +98,11 @@ rel="noopener"
                 </div>
 
                 <!-- Fall River Location -->
-                <div class="card amp-location">
-                    <div class="amp-header">
-                        <img
-src="images/AMPlogo.png"
-alt="AMP Academy LLC Logo"
-class="amp-logo"
->
-                        <h3>Fall River, MA</h3>
-                    </div>
-                    <p><strong>Venue:</strong> AMP Academy LLC</p>
+                <div class="card">
+                    <h3>Fall River, MA</h3>
+                    <p><strong>Venue:</strong> AMP Academy Gym</p>
                     <p><strong>Address:</strong> 418 Quequechan Street, 2nd Floor<br>Fall River, MA 02723</p>
-                    <p><strong>Phone:</strong> <a onclick="window.location.href='tel:+15085671002'" style="cursor: pointer; color: #007bff; text-decoration: underline;">(508) 567-1002</a></p>
-                    <p><strong>Email:</strong> <a href="mailto:info@ampacademygym.com">info@ampacademygym.com</a></p>
+                    <p><strong>Phone:</strong> <a href="tel:+15085671002">(508) 567-1002</a></p>
                     <p><strong>Website:</strong> <a
 href="https://www.ampacademygym.com/"
 target="_blank"
@@ -128,53 +123,50 @@ rel="noopener"
                         <li>Saturday-Sunday: 9 AM - 1 PM</li>
                     </ul>
                 </div>
+
+                <!-- Providence Location -->
+                <div class="card">
+                    <h3>Providence, RI</h3>
+                    <p><strong>Status:</strong> Training confirmed</p>
+                    <p><strong>Schedule:</strong> Wednesday & Friday, 6:30 PM</p>
+                    <p><strong>Contact:</strong> Please contact Mestre Tigri for venue details</p>
+                    <p><strong>Phone:</strong> <a href="tel:+14017813480">(401) 781-3480</a></p>
+                    <p><em>Specific venue details available upon contact</em></p>
+                </div>
             </div>
         </section>
 
-        <!-- Instagram Feed Section -->
-        <section class="instagram-section">
-            <h2>Follow Our Journey</h2>
-            <div id="instagram-feed" class="instagram-grid">
-                <!-- Instagram posts will be loaded here -->
-                <div class="instagram-loading">
-                    <p>Loading Instagram feed...</p>
+        <!-- Programs Offered -->
+        <section class="programs">
+            <h2>Programs Offered</h2>
+            <ul>
+                <li>Regular capoeira training classes</li>
+                <li>8-Week Introductory Capoeira Program (at AMP Academy)</li>
+                <li>Cultural education presentations</li>
+                <li>Batizado (graduation) ceremonies</li>
+                <li>Community performances and cultural events</li>
+            </ul>
+        </section>
+
+        <!-- Community Gallery -->
+        <section class="gallery-section">
+            <h2>Community Gallery</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="images/grupo_ondas_ocean_state_encounter.jpg" alt="Grupo Ondas at Ocean State Capoeira Encounter 2017">
+                    <div class="caption">
+                        <p>Ocean State Capoeira Encounter 2017</p>
+                    </div>
                 </div>
-            </div>
-            <div class="instagram-cta">
-                <a
-href="https://instagram.com/grupoondascapoeira"
-target="_blank"
-class="instagram-link"
->
-                    Follow @grupoondascapoeira on Instagram
-                </a>
+                <div class="gallery-item">
+                    <img src="images/grupo_ondas_southside_cultural_center.jpg" alt="Grupo Ondas performance at Southside Cultural Center">
+                    <div class="caption">
+                        <p>Performance at Southside Cultural Center</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
-
-    <!-- Contact Information moved to bottom -->
-    <section id="contact" class="contact">
-        <h2>Contact Information</h2>
-        <div class="contact-info">
-            <div class="contact-item">
-                <h3>Mestre Tigri</h3>
-                <p>Silas O Pinto</p>
-                <p><a onclick="window.location.href='tel:+14017813480'" style="cursor: pointer; color: #007bff; text-decoration: underline;">(401) 781-3480</a></p>
-            </div>
-            <div class="contact-item">
-                <h3>Follow Us</h3>
-                <p><a
-href="https://instagram.com/grupoondascapoeira"
-target="_blank"
-rel="noopener"
->@grupoondascapoeira</a></p>
-            </div>
-            <div class="contact-item">
-                <h3>Mailing Address</h3>
-                <p>54 West Friendship St<br>Providence, RI 02907</p>
-            </div>
-        </div>
-    </section>
 
     <footer>
         <p>&copy; 2024 Grupo Ondas. Rhode Island's Only Capoeira Group since 2000.</p>

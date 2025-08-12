@@ -1,393 +1,308 @@
-// Grupo Ondas Website JavaScript - Enhanced with Instagram Integration
-// Mobile navigation, smooth scrolling, animations, and Instagram feed
+// Grupo Ondas Website JavaScript
+// Minimal JavaScript for navigation and interactive elements
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all functionality
-    initMobileNavigation();
-    initSmoothScrolling();
-    initAnimations();
-    initInstagramFeed();
-    initPhoneLinks();
-    initAccessibility();
-});
-
-// Mobile Navigation Toggle
-function initMobileNavigation() {
+    // Mobile Navigation Toggle
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
     
     if (hamburger && navMenu) {
         hamburger.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
             hamburger.classList.toggle('active');
-            
-            // Animate hamburger lines
-            const spans = hamburger.querySelectorAll('span');
-            spans.forEach((span, index) => {
-                if (hamburger.classList.contains('active')) {
-                    if (index === 0) span.style.transform = 'rotate(45deg) translate(5px, 5px)';
-                    if (index === 1) span.style.opacity = '0';
-                    if (index === 2) span.style.transform = 'rotate(-45deg) translate(7px, -6px)';
-                } else {
-                    span.style.transform = 'none';
-                    span.style.opacity = '1';
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!hamburger.contains(event.target) && !navMenu.contains(event.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    }
+    
+    // Set active navigation item based on current page
+    setActiveNavItem();
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Add hover effects to cards
+    addCardHoverEffects();
+    
+    // Initialize any page-specific functionality
+    initializePageSpecificFeatures();
+});
+
+// Set active navigation item based on current page
+function setActiveNavItem() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        const linkHref = link.getAttribute('href');
+        
+        // Handle different page matching scenarios
+        if (
+            (currentPage === 'index.html' && (linkHref === 'index.html' || linkHref === './index.html' || linkHref === '/')) ||
+            (currentPage === 'about.html' && (linkHref === 'about.html' || linkHref === './about.html')) ||
+            (currentPage === 'songs.html' && (linkHref === 'songs.html' || linkHref === './songs.html')) ||
+            (currentPage === '' && (linkHref === 'index.html' || linkHref === './index.html' || linkHref === '/'))
+        ) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// Add enhanced hover effects to cards
+function addCardHoverEffects() {
+    const cards = document.querySelectorAll('.card, .song-card, .instrument-card, .style-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+            this.style.boxShadow = '0 8px 25px rgba(74, 144, 226, 0.15)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+        });
+    });
+}
+
+// Initialize page-specific features
+function initializePageSpecificFeatures() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    
+    switch(currentPage) {
+        case 'index.html':
+        case '':
+            initializeHomepage();
+            break;
+        case 'about.html':
+            initializeAboutPage();
+            break;
+        case 'songs.html':
+            initializeSongsPage();
+            break;
+    }
+}
+
+// Homepage specific functionality
+function initializeHomepage() {
+    // Add click-to-call functionality for phone numbers
+    const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+    phoneLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            // On desktop, show a confirmation dialog
+            if (window.innerWidth > 768) {
+                const phoneNumber = this.getAttribute('href').replace('tel:', '');
+                if (!confirm(`Call ${phoneNumber}?`)) {
+                    e.preventDefault();
+                }
+            }
+        });
+    });
+    
+    // Add animation to location cards on scroll
+    observeLocationCards();
+}
+
+// About page specific functionality
+function initializeAboutPage() {
+    // Add fade-in animation for sections
+    observeSections();
+    
+    // Add click functionality to social media links
+    const socialLinks = document.querySelectorAll('a[href*="instagram.com"]');
+    socialLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Track social media clicks (placeholder for analytics)
+            console.log('Instagram link clicked');
+        });
+    });
+}
+
+// Songs page specific functionality
+function initializeSongsPage() {
+    // Add interactive elements for instrument cards
+    const instrumentCards = document.querySelectorAll('.instrument-card');
+    instrumentCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // Add a subtle pulse effect when clicked
+            this.style.animation = 'pulse 0.3s ease-in-out';
+            setTimeout(() => {
+                this.style.animation = '';
+            }, 300);
+        });
+    });
+    
+    // Add comparison highlighting for style cards
+    const styleCards = document.querySelectorAll('.style-card');
+    styleCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            // Slightly dim other style cards when hovering one
+            styleCards.forEach(otherCard => {
+                if (otherCard !== this) {
+                    otherCard.style.opacity = '0.7';
                 }
             });
         });
         
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-                navMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-                const spans = hamburger.querySelectorAll('span');
-                spans.forEach(span => {
-                    span.style.transform = 'none';
-                    span.style.opacity = '1';
-                });
-            }
-        });
-    }
-}
-
-// Smooth Scrolling for Anchor Links
-function initSmoothScrolling() {
-    const links = document.querySelectorAll('a[href^="#"]');
-    
-    links.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (href === '#') return;
-            
-            const target = document.querySelector(href);
-            if (target) {
-                e.preventDefault();
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const targetPosition = target.offsetTop - headerHeight - 20;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-}
-
-// Intersection Observer for Animations
-function initAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Observe cards and sections
-    const animatedElements = document.querySelectorAll('.card, .contact-item, .instagram-post');
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-}
-
-// Instagram Feed Integration
-function initInstagramFeed() {
-    const instagramContainer = document.getElementById('instagram-feed');
-    if (!instagramContainer) return;
-    
-    // Primary method: Elfsight Widget (recommended from research)
-    loadElfsightWidget();
-    
-    // Fallback method: Custom implementation with error handling
-    setTimeout(() => {
-        if (instagramContainer.querySelector('.instagram-loading')) {
-            loadCustomInstagramFeed();
-        }
-    }, 5000); // Wait 5 seconds for Elfsight to load
-}
-
-// Load Elfsight Instagram Widget
-function loadElfsightWidget() {
-    // For this implementation, we'll use the custom fallback directly
-    // since we don't have a specific Elfsight widget ID configured
-    console.log('Using custom Instagram feed implementation');
-    loadCustomInstagramFeed();
-}
-
-// Custom Instagram Feed Implementation (Fallback)
-function loadCustomInstagramFeed() {
-    const instagramContainer = document.getElementById('instagram-feed');
-    
-    // Simulate Instagram posts with fallback content
-    const fallbackPosts = [
-        {
-            id: '1',
-            caption: 'Training session at our Warwick location! 🥋 #capoeira #grupoondas #martialarts',
-            media_url: 'images/grupo_ondas_ocean_state_encounter.jpg',
-            permalink: 'https://instagram.com/grupoondascapoeira'
-        },
-        {
-            id: '2',
-            caption: 'Community performance bringing Afro-Brazilian culture to Rhode Island! 🎵 #capoeira #culture #performance',
-            media_url: 'images/grupo_ondas_southside_cultural_center.jpg',
-            permalink: 'https://instagram.com/grupoondascapoeira'
-        }
-    ];
-    
-    try {
-        // Clear loading content
-        instagramContainer.innerHTML = '';
-        
-        // Create posts from fallback data
-        fallbackPosts.forEach(post => {
-            const postElement = createInstagramPost(post);
-            instagramContainer.appendChild(postElement);
-        });
-        
-        // Add message about live feed
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'instagram-message';
-        messageDiv.innerHTML = `
-            <p style="text-align: center; color: #666; font-style: italic; margin-top: 2rem;">
-                For the latest posts, visit our 
-                <a href="https://instagram.com/grupoondascapoeira" target="_blank" style="color: #2E5BBA;">
-                    Instagram page @grupoondascapoeira
-                </a>
-            </p>
-        `;
-        instagramContainer.appendChild(messageDiv);
-        
-    } catch (error) {
-        console.error('Error loading custom Instagram feed:', error);
-        showInstagramFallback();
-    }
-}
-
-// Create Instagram Post Element
-function createInstagramPost(post) {
-    const postDiv = document.createElement('div');
-    postDiv.className = 'instagram-post';
-    postDiv.style.opacity = '0';
-    postDiv.style.transform = 'translateY(30px)';
-    
-    postDiv.innerHTML = `
-        <img src="${post.media_url}" alt="Instagram post" loading="lazy" />
-        <p>${post.caption || ''}</p>
-        <a href="${post.permalink}" target="_blank" rel="noopener">View on Instagram</a>
-    `;
-    
-    // Animate post appearance
-    setTimeout(() => {
-        postDiv.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        postDiv.style.opacity = '1';
-        postDiv.style.transform = 'translateY(0)';
-    }, 100);
-    
-    return postDiv;
-}
-
-// Instagram Fallback Content
-function showInstagramFallback() {
-    const instagramContainer = document.getElementById('instagram-feed');
-    instagramContainer.innerHTML = `
-        <div class="instagram-fallback" style="text-align: center; padding: 3rem;">
-            <h3 style="color: #2E5BBA; margin-bottom: 1rem;">Follow Our Journey</h3>
-            <p style="color: #666; margin-bottom: 2rem;">
-                Stay updated with our latest capoeira training sessions, performances, and community events.
-            </p>
-            <a href="https://instagram.com/grupoondascapoeira" 
-               target="_blank" 
-               rel="noopener"
-               class="instagram-link">
-                Visit @grupoondascapoeira on Instagram
-            </a>
-        </div>
-    `;
-}
-
-// Phone Number Click-to-Call Enhancement
-function initPhoneLinks() {
-    const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
-    
-    phoneLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            // Add visual feedback
-            this.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 150);
-        });
-    });
-}
-
-// Accessibility Enhancements
-function initAccessibility() {
-    // Add skip link for keyboard navigation
-    const skipLink = document.createElement('a');
-    skipLink.href = '#main';
-    skipLink.textContent = 'Skip to main content';
-    skipLink.className = 'skip-link';
-    skipLink.style.cssText = `
-        position: absolute;
-        top: -40px;
-        left: 6px;
-        background: #2E5BBA;
-        color: white;
-        padding: 8px;
-        text-decoration: none;
-        border-radius: 4px;
-        z-index: 1001;
-        transition: top 0.3s;
-    `;
-    
-    skipLink.addEventListener('focus', function() {
-        this.style.top = '6px';
-    });
-    
-    skipLink.addEventListener('blur', function() {
-        this.style.top = '-40px';
-    });
-    
-    document.body.insertBefore(skipLink, document.body.firstChild);
-    
-    // Add main landmark
-    const main = document.querySelector('main');
-    if (main) {
-        main.id = 'main';
-        main.setAttribute('role', 'main');
-    }
-    
-    // Enhance form accessibility
-    const inputs = document.querySelectorAll('input, textarea, select');
-    inputs.forEach(input => {
-        if (!input.getAttribute('aria-label') && !input.getAttribute('aria-labelledby')) {
-            const label = document.querySelector(`label[for="${input.id}"]`);
-            if (label) {
-                input.setAttribute('aria-labelledby', label.id || 'label-' + input.id);
-            }
-        }
-    });
-}
-
-// Card Hover Effects Enhancement
-document.addEventListener('DOMContentLoaded', function() {
-    const cards = document.querySelectorAll('.card');
-    
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px) scale(1.02)';
-        });
-        
         card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-    });
-});
-
-// Logo Animation
-document.addEventListener('DOMContentLoaded', function() {
-    const logo = document.querySelector('.logo-img');
-    if (logo) {
-        logo.addEventListener('load', function() {
-            this.style.opacity = '1';
-            this.style.transform = 'scale(1)';
-        });
-        
-        // Initial state
-        logo.style.opacity = '0';
-        logo.style.transform = 'scale(0.8)';
-        logo.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    }
-});
-
-
-
-// Error Handling for External Resources
-window.addEventListener('error', function(event) {
-    if (event.target.tagName === 'IMG') {
-        console.warn('Image failed to load:', event.target.src);
-        event.target.style.display = 'none';
-    }
-});
-
-// Social Media Link Tracking (Optional Analytics)
-function initSocialTracking() {
-    const socialLinks = document.querySelectorAll('a[href*="instagram.com"]');
-    
-    socialLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            // Track social media clicks (can be integrated with analytics)
-            console.log('Instagram link clicked:', this.href);
+            // Restore opacity to all cards
+            styleCards.forEach(otherCard => {
+                otherCard.style.opacity = '1';
+            });
         });
     });
 }
 
-// Initialize social tracking
-document.addEventListener('DOMContentLoaded', initSocialTracking);
-
-// Responsive Navigation Enhancements
-function enhanceResponsiveNav() {
-    const navMenu = document.querySelector('.nav-menu');
+// Intersection Observer for location cards animation
+function observeLocationCards() {
+    const locationCards = document.querySelectorAll('.card');
     
-    // Close mobile menu on window resize
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 768) {
-            navMenu.classList.remove('active');
-            const hamburger = document.querySelector('.hamburger');
-            if (hamburger) {
-                hamburger.classList.remove('active');
-                const spans = hamburger.querySelectorAll('span');
-                spans.forEach(span => {
-                    span.style.transform = 'none';
-                    span.style.opacity = '1';
-                });
+    if (locationCards.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        
+        locationCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    }
+}
+
+// Intersection Observer for sections fade-in
+function observeSections() {
+    const sections = document.querySelectorAll('section');
+    
+    if (sections.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -30px 0px'
+        });
+        
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(section);
+        });
+    }
+}
+
+// Utility function to format phone numbers for display
+function formatPhoneNumber(phoneNumber) {
+    const cleaned = phoneNumber.replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+        return `(${match[1]}) ${match[2]}-${match[3]}`;
+    }
+    return phoneNumber;
+}
+
+// Utility function to validate email addresses
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// Add CSS animation keyframes dynamically
+function addAnimationStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-    });
+    `;
+    document.head.appendChild(style);
 }
 
-// Initialize responsive navigation enhancements
-document.addEventListener('DOMContentLoaded', enhanceResponsiveNav);
+// Initialize animation styles
+addAnimationStyles();
 
-// Scroll-based Header Effects
-function initScrollEffects() {
-    const header = document.querySelector('header');
-    
-    window.addEventListener('scroll', function() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+// Handle window resize events
+window.addEventListener('resize', function() {
+    // Close mobile menu on resize to larger screen
+    if (window.innerWidth > 768) {
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
         
-        // Add/remove scrolled class for styling
-        if (scrollTop > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        if (hamburger && navMenu) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
         }
-    }, { passive: true });
-}
-
-// Initialize scroll effects
-document.addEventListener('DOMContentLoaded', initScrollEffects);
-
-// Add CSS for scroll effects
-const scrollStyles = document.createElement('style');
-scrollStyles.textContent = `
-    header.scrolled {
-        background-color: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
     }
-    
-    .skip-link:focus {
-        top: 6px !important;
+});
+
+// Handle scroll events for header shadow
+window.addEventListener('scroll', function() {
+    const header = document.querySelector('header');
+    if (header) {
+        if (window.scrollY > 100) {
+            header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.15)';
+        } else {
+            header.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
+        }
     }
-`;
-document.head.appendChild(scrollStyles);
+});
+
+// Export functions for potential external use
+window.GrupoOndasWebsite = {
+    setActiveNavItem,
+    formatPhoneNumber,
+    isValidEmail
+};
