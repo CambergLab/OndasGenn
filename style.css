@@ -600,8 +600,155 @@ button:focus {
     .card {
         border: 2px solid #000;
     }
-    
+
     .instagram-post {
         border: 2px solid #000;
+    }
+}
+
+/* Music Page Specific Styles */
+.mt-2 {
+    margin-top: 1rem;
+}
+
+.song-types-grid,
+.instruments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.song-card,
+.instrument-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(46, 91, 186, 0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.song-card::before,
+.instrument-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2E5BBA, #4A90E2);
+}
+
+.song-card:hover,
+.instrument-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(46, 91, 186, 0.2);
+    border-color: #4A90E2;
+}
+
+.highlight {
+    color: #2E5BBA;
+    font-weight: 600;
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.styles-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.style-card {
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(46, 91, 186, 0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.style-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2E5BBA, #4A90E2);
+}
+
+.style-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(46, 91, 186, 0.2);
+    border-color: #4A90E2;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.etiquette-list,
+.progression-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.etiquette-list li,
+.progression-list li {
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.etiquette-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #2E5BBA;
+    font-weight: bold;
+}
+
+.progression-list li::before {
+    content: counter(step-counter);
+    counter-increment: step-counter;
+    position: absolute;
+    left: 0;
+    color: #2E5BBA;
+    font-weight: bold;
+    background: rgba(46, 91, 186, 0.1);
+    border-radius: 50%;
+    width: 1.2rem;
+    height: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+.progression-list {
+    counter-reset: step-counter;
+}
+
+@media (max-width: 768px) {
+    .song-types-grid,
+    .instruments-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .styles-comparison {
+        grid-template-columns: 1fr;
+    }
+
+    .song-card,
+    .instrument-card,
+    .style-card {
+        padding: 1.5rem;
     }
 }
