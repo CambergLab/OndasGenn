@@ -285,14 +285,24 @@ h3 {
     border-left: 4px solid #28a745;
 }
 
-/* AMP Academy Special Styling */
+/* AMP Academy Special Styling - Red Color Design */
 .amp-location {
     border: 2px solid #DC143C;
-    background: linear-gradient(135deg, rgba(220, 20, 60, 0.05) 0%, rgba(30, 144, 255, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(220, 20, 60, 0.08) 0%, rgba(255, 69, 58, 0.05) 100%);
 }
 
 .amp-location::before {
-    background: linear-gradient(90deg, #DC143C, #1E90FF);
+    background: linear-gradient(90deg, #DC143C, #FF4B3A);
+}
+
+.amp-location h3 {
+    color: #DC143C;
+    margin-bottom: 0;
+}
+
+.amp-location .schedule-info {
+    background: rgba(220, 20, 60, 0.1);
+    border-left: 4px solid #DC143C;
 }
 
 .amp-header {
