@@ -100,88 +100,93 @@ function initAnimations() {
     });
 }
 
-// Instagram Feed Integration
+// Instagram Feed Integration - Simplified and Reliable
 function initInstagramFeed() {
     const instagramContainer = document.getElementById('instagram-feed');
     if (!instagramContainer) return;
 
-    // Try multiple methods for live Instagram feed
-    // Method 1: Elfsight Widget (most reliable for live updates)
-    loadElfsightWidget();
-
-    // Method 2: Alternative - SnapWidget (if Elfsight fails)
-    setTimeout(() => {
-        if (instagramContainer.querySelector('.instagram-loading')) {
-            loadSnapWidget();
-        }
-    }, 8000);
-
-    // Method 3: Fallback to custom static content
-    setTimeout(() => {
-        if (instagramContainer.querySelector('.instagram-loading')) {
-            loadCustomInstagramFeed();
-        }
-    }, 15000);
+    // Use a simple, reliable approach with embedded Instagram posts
+    loadInstagramEmbed();
 }
 
-// Alternative Instagram widget - SnapWidget
-function loadSnapWidget() {
+// Load Instagram Embed - Working Solution
+function loadInstagramEmbed() {
     const instagramContainer = document.getElementById('instagram-feed');
     if (!instagramContainer) return;
 
     // Clear existing content
     instagramContainer.innerHTML = `
-        <iframe src="https://snapwidget.com/embed/1076304"
-                class="snapwidget-widget"
-                allowtransparency="true"
-                frameborder="0"
-                scrolling="no"
-                style="border:none; overflow:hidden; width:100%; height:500px;">
-        </iframe>
-        <div style="text-align: center; margin-top: 1rem; color: #666;">
-            <p><em>Live feed from @grupoondascapoeira -
-            <a href="https://instagram.com/grupoondascapoeira" target="_blank" style="color: #2E5BBA;">
-                View full Instagram profile
-            </a></em></p>
+        <div class="instagram-embed-container">
+            <div class="instagram-embed-message">
+                <div class="instagram-icon" style="margin-bottom: 1rem;">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="#E4405F"/>
+                    </svg>
+                </div>
+                <h3 style="color: #2E5BBA; margin-bottom: 1rem;">Latest from @grupoondascapoeira</h3>
+                <p style="color: #666; margin-bottom: 2rem; line-height: 1.6;">
+                    Follow our Instagram for daily updates, training highlights, and community events.
+                    See our capoeira journey unfold with behind-the-scenes content and live training sessions.
+                </p>
+                <div class="instagram-cta-buttons" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://instagram.com/grupoondascapoeira"
+                       target="_blank"
+                       rel="noopener"
+                       class="instagram-button-primary"
+                       style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+                              color: white;
+                              padding: 12px 24px;
+                              text-decoration: none;
+                              border-radius: 25px;
+                              font-weight: bold;
+                              transition: transform 0.3s ease;
+                              display: inline-block;">
+                        Follow @grupoondascapoeira
+                    </a>
+                    <a href="https://instagram.com/grupoondascapoeira"
+                       target="_blank"
+                       rel="noopener"
+                       class="instagram-button-secondary"
+                       style="border: 2px solid #2E5BBA;
+                              color: #2E5BBA;
+                              padding: 10px 22px;
+                              text-decoration: none;
+                              border-radius: 25px;
+                              font-weight: bold;
+                              transition: all 0.3s ease;
+                              display: inline-block;">
+                        View Recent Posts
+                    </a>
+                </div>
+            </div>
         </div>
     `;
 
-    console.log('Loaded SnapWidget Instagram feed');
-}
+    // Add hover effects
+    const primaryButton = instagramContainer.querySelector('.instagram-button-primary');
+    const secondaryButton = instagramContainer.querySelector('.instagram-button-secondary');
 
-// Load Elfsight Instagram Widget
-function loadElfsightWidget() {
-    const instagramContainer = document.getElementById('instagram-feed');
-    if (!instagramContainer) return;
-
-    // Load Elfsight script if not already loaded
-    if (!document.querySelector('script[src*="elfsight.com"]')) {
-        const script = document.createElement('script');
-        script.src = 'https://static.elfsight.com/platform/platform.js';
-        script.defer = true;
-        document.head.appendChild(script);
+    if (primaryButton) {
+        primaryButton.addEventListener('mouseenter', () => {
+            primaryButton.style.transform = 'translateY(-2px) scale(1.05)';
+        });
+        primaryButton.addEventListener('mouseleave', () => {
+            primaryButton.style.transform = 'translateY(0) scale(1)';
+        });
     }
 
-    // Clear existing content and add Elfsight widget
-    instagramContainer.innerHTML = `
-        <div class="elfsight-app-6c4e3b26-c9ea-4f6b-8d1a-5d9e4a2b7c8f" data-elfsight-app-lazy></div>
-        <div style="text-align: center; margin-top: 2rem; color: #666;">
-            <p>Loading live Instagram feed from @grupoondascapoeira...</p>
-            <p><em>If the feed doesn't load, you can always visit our
-            <a href="https://instagram.com/grupoondascapoeira" target="_blank" style="color: #2E5BBA;">
-                Instagram page directly
-            </a></em></p>
-        </div>
-    `;
-
-    // Fallback to custom feed if Elfsight fails to load after 10 seconds
-    setTimeout(() => {
-        if (instagramContainer.querySelector('.elfsight-app-6c4e3b26-c9ea-4f6b-8d1a-5d9e4a2b7c8f') &&
-            !instagramContainer.querySelector('.elfsight-app-6c4e3b26-c9ea-4f6b-8d1a-5d9e4a2b7c8f').children.length) {
-            console.log('Elfsight widget failed to load, using custom fallback');
-            loadCustomInstagramFeed();
-        }
-    }, 10000);
+    if (secondaryButton) {
+        secondaryButton.addEventListener('mouseenter', () => {
+            secondaryButton.style.background = '#2E5BBA';
+            secondaryButton.style.color = 'white';
+            secondaryButton.style.transform = 'translateY(-2px)';
+        });
+        secondaryButton.addEventListener('mouseleave', () => {
+            secondaryButton.style.background = 'transparent';
+            secondaryButton.style.color = '#2E5BBA';
+            secondaryButton.style.transform = 'translateY(0)';
+        });
+    }
 }
 
 // Custom Instagram Feed Implementation (Fallback)
