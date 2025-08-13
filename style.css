@@ -432,8 +432,100 @@ h3 {
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
 }
 
-/* Contact Section */
-.contact {
+/* About Us Section */
+.about-us {
+    margin: 3rem 0;
+    padding: 2rem 0;
+}
+
+.about-history {
+    margin-bottom: 4rem;
+}
+
+.capoeira-explanation {
+    margin-bottom: 4rem;
+}
+
+.mestres-section {
+    margin-bottom: 4rem;
+}
+
+.mestres-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.mestre-card {
+    background: linear-gradient(135deg, rgba(46, 91, 186, 0.05) 0%, rgba(74, 144, 226, 0.05) 100%);
+    border: 2px solid #2E5BBA;
+}
+
+.mestre-card::before {
+    background: linear-gradient(90deg, #2E5BBA, #4A90E2);
+}
+
+.mestre-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(46, 91, 186, 0.2);
+}
+
+.mestre-header h3 {
+    color: #2E5BBA;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.mestre-title {
+    color: #2c2c2c;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.mestre-subtitle {
+    color: #666;
+    font-style: italic;
+}
+
+.mestre-content p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.formados-section {
+    margin-bottom: 4rem;
+}
+
+.formados-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.formado-location {
+    text-align: center;
+}
+
+.formado-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.formado-list li {
+    margin-bottom: 0.8rem;
+    padding: 0.5rem;
+    background: rgba(46, 91, 186, 0.1);
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.contact-section {
     background: linear-gradient(135deg, #2c2c2c 0%, #4a4a4a 100%);
     padding: 4rem 2rem;
     border-radius: 20px;
@@ -442,12 +534,12 @@ h3 {
     color: white;
 }
 
-.contact h2 {
+.contact-section h2 {
     color: #fff;
     margin-bottom: 2rem;
 }
 
-.contact h2::after {
+.contact-section h2::after {
     background: linear-gradient(90deg, #4A90E2, #2E5BBA);
 }
 
@@ -455,7 +547,7 @@ h3 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
-    max-width: 800px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -494,6 +586,25 @@ h3 {
 .contact-item a:hover {
     color: #87CEEB;
     text-decoration: underline;
+}
+
+/* Responsive adjustments for About Us */
+@media (max-width: 768px) {
+    .mestres-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .formados-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mestre-card {
+        padding: 1.5rem;
+    }
+
+    .mestre-header h3 {
+        font-size: 1.6rem;
+    }
 }
 
 /* Footer */
