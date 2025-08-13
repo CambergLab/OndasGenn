@@ -1,6 +1,24 @@
 // Grupo Ondas Website JavaScript - Enhanced with Instagram Integration
 // Mobile navigation, smooth scrolling, animations, and Instagram feed
 
+// Prevent any widget initialization errors
+window.addEventListener('error', function(e) {
+    if (e.message && e.message.includes('WIDGET_NOT_FOUND')) {
+        console.warn('Widget error caught and ignored:', e.message);
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Override any global widget platform that might cause errors
+if (window.eapps) {
+    window.eapps = {
+        Platform: {
+            init: function() { console.log('Widget platform disabled'); }
+        }
+    };
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all functionality
     initMobileNavigation();
