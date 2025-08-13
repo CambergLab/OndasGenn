@@ -265,6 +265,26 @@ h3 {
     margin: 1rem 0;
 }
 
+/* Providence Location Special Styling */
+.providence-location {
+    border: 2px solid #28a745;
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.05) 0%, rgba(92, 184, 92, 0.05) 100%);
+}
+
+.providence-location::before {
+    background: linear-gradient(90deg, #28a745, #5cb85c);
+}
+
+.providence-location h3 {
+    color: #28a745;
+    margin-bottom: 1.5rem;
+}
+
+.providence-location .schedule-info {
+    background: rgba(40, 167, 69, 0.1);
+    border-left: 4px solid #28a745;
+}
+
 /* AMP Academy Special Styling */
 .amp-location {
     border: 2px solid #DC143C;
